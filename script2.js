@@ -9,7 +9,7 @@ function verificar() {
         return;
     }
 
-    fetch(`http://localhost:8000/verificar?conjuncao=${encodeURIComponent(conjuncao)}&resposta=${encodeURIComponent(resposta)}`)
+    fetch(`https://conjuncoes-app.onrender.com/verificar?conjuncao=${conjuncao}&resposta=${resposta}`)
         .then(res => {
             if (!res.ok) throw new Error("Erro na requisição");
             return res.text();
@@ -35,7 +35,7 @@ function verificar() {
 }
 
 function sortearConjuncao() {
-    fetch("http://localhost:8000/sortear")
+    fetch('https://conjuncoes-app.onrender.com/sortear')
         .then(res => {
             if (!res.ok) throw new Error("Erro ao sortear conjunção");
             return res.text();
