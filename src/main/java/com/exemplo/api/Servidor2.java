@@ -18,6 +18,15 @@ public class Servidor2 {
         int port = Integer.parseInt(System.getenv().getOrDefault("PORT", "8000"));
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
 
+        server.createContext("/", (HttpExchange exchange) -> {
+        String msg = "API disponível nos caminhos /sortear e /verificar";
+        byte[] responseBytes = msg.getBytes(StandardCharsets.UTF_8);
+        exchange.getResponseHeaders().add("Content-Type", "text/plain; charset=UTF-8");
+        exchange.sendResponseHeaders(200, responseBytes.length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(responseBytes);
+        os.close();
+        });
 
         server.createContext("/verificar", (HttpExchange exchange) -> {
             String query = exchange.getRequestURI().getQuery();
